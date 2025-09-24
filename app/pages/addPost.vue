@@ -130,9 +130,7 @@ const handleSubmit = async () => {
     content.value = "";
     removeImage();
     ElMessage.success("Your post has been created!");
-    router.push("/").then(() => {
-      router.go(0); // refresh the page after navigation
-    });
+    router.push("/");
   }
 };
 </script>
