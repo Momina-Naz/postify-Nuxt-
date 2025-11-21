@@ -24,7 +24,7 @@
 
             <div v-else class="grid grid-cols-1 gap-4">
               <el-card v-for="user in following" :key="user._id" shadow="never">
-                <div class="flex justify-between items-center gap-2">
+                <div class="flex justify-between items-center gap-4">
                   <div class="flex items-center gap-3">
                     <el-avatar
                       :size="40"
@@ -69,7 +69,7 @@
                 v-for="person in filteredPeople"
                 :key="person._id"
               >
-                <div class="flex justify-between items-center gap-2">
+                <div class="flex justify-between items-center gap-4">
                   <div class="flex items-center gap-3">
                     <el-avatar
                       :size="40"
