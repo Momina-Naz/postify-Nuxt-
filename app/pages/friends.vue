@@ -1,6 +1,6 @@
 <template>
   <main class="flex justify-center">
-    <el-card class="w-[950px] rounded-2xl" shadow="never">
+    <el-card class="w-[948px] rounded-2xl" shadow="never">
       <!-- Header -->
       <div class="flex items-center gap-3 mb-6">
         <el-avatar :size="50" style="font-size: 18px; background-color: black">
@@ -24,7 +24,7 @@
 
             <div v-else class="grid grid-cols-1 gap-4">
               <el-card v-for="user in following" :key="user._id" shadow="never">
-                <div class="flex justify-between items-center gap-4">
+                <div class="flex justify-between items-center gap-2">
                   <div class="flex items-center gap-3">
                     <el-avatar
                       :size="40"
@@ -35,7 +35,9 @@
                     </el-avatar>
 
                     <div>
-                      <p class="font-semibold text-gray-800 text-lg">
+                      <p
+                        class="font-semibold text-gray-800 text-lg min-w-[100px]"
+                      >
                         {{ user.name }}
                       </p>
                       <p class="text-gray-500 flex items-center gap-1">
@@ -47,7 +49,9 @@
 
                   <el-button size="large" @click="unfollow(user._id)">
                     <Icon name="mdi:account-minus" class="w-6 h-6 text-black" />
-                    <span class="text-gray-500 ml-1">Unfollow</span>
+                    <span class="text-gray-500 ml-1 hidden sm:block"
+                      >Unfollow</span
+                    >
                   </el-button>
                 </div>
               </el-card>
@@ -69,7 +73,7 @@
                 v-for="person in filteredPeople"
                 :key="person._id"
               >
-                <div class="flex justify-between items-center gap-4">
+                <div class="flex justify-between items-center gap-2">
                   <div class="flex items-center gap-3">
                     <el-avatar
                       :size="40"
@@ -80,7 +84,9 @@
                     </el-avatar>
 
                     <div>
-                      <p class="font-semibold text-gray-800 text-lg">
+                      <p
+                        class="font-semibold text-gray-800 text-lg min-w-[100px]"
+                      >
                         {{ person.name }}
                       </p>
                       <p class="text-gray-500 flex items-center gap-1">
@@ -92,7 +98,9 @@
 
                   <el-button size="large" @click="follow(person._id)">
                     <Icon name="mdi:account-plus" class="w-6 h-6 text-black" />
-                    <span class="text-gray-500 ml-1">Follow</span>
+                    <span class="text-gray-500 ml-1 hidden sm:block"
+                      >Follow</span
+                    >
                   </el-button>
                 </div>
               </el-card>
