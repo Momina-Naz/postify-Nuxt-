@@ -4,8 +4,7 @@
       <!-- Header -->
       <div class="flex items-center gap-3 mb-4">
         <el-avatar :size="50" style="font-size: 18px; background-color: black"
-          >M
-          <!-- {{ userName.charAt(0).toUpperCase() }} -->
+          >{{ userName ? userName.charAt(0).toUpperCase() : "Guest" }}
         </el-avatar>
 
         <div>
@@ -75,11 +74,13 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useSocialMediaStore } from "~~/stores/socialMedia";
-import { useRoute } from "vue-router";
-definePageMeta({ layout: "home" });
 
+import { useAuthStore } from "~~/stores/Auth";
+definePageMeta({ layout: "home" });
+const authstore = useAuthStore();
+const userName = computed(() => authstore.user?.name);
 const store = useSocialMediaStore();
-const router = useRouter();
+
 // state
 const content = ref("");
 const mediaFile = ref(null);

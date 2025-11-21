@@ -3,56 +3,62 @@ import api from "~~/utils/api";
 
 export const useFriendsStore = defineStore("Friends", {
   state: () => ({
-    friends: [],
+    followers: [],
+    following: [],
     people: [],
     loading: false,
     error: null,
   }),
+
   actions: {
-    // Fetch friends from API
-    async fetchfriends() {
+    // USERS I FOLLOW
+    async fetchFollowing() {
       this.loading = true;
       this.error = null;
-      console.log("Fetching friends...");
-
       try {
         const token = localStorage.getItem("token");
-        const response = await api.get("/api/v1/follows/following", {
+        const res = await api.get("/api/v1/follows/following", {
           headers: token ? { Authorization: `Bearer ${token}` } : {},
         });
-
-        console.log("API response:", response.data.data);
-        this.friends = response.data.data;
-        console.log("friends after assignment:", this.friends);
+        this.following = res.data.data;
       } catch (err) {
-        this.error = err.message || "Failed to fetch friends";
-        console.error("Error fetching friends:", this.error);
+        this.error = err.message;
       } finally {
         this.loading = false;
-        console.log("Fetching finished. Loading =", this.loading);
       }
     },
-    // Fetch friends from API
+
+    // USERS WHO FOLLOW ME
+    async fetchFollowers() {
+      this.loading = true;
+      this.error = null;
+      try {
+        const token = localStorage.getItem("token");
+        const res = await api.get("/api/v1/follows/followers", {
+          headers: token ? { Authorization: `Bearer ${token}` } : {},
+        });
+        this.followers = res.data.data;
+      } catch (err) {
+        this.error = err.message;
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    // ALL USERS
     async fetchPeople() {
       this.loading = true;
       this.error = null;
-      console.log("Fetching people...");
-
       try {
         const token = localStorage.getItem("token");
-        const response = await api.get("/api/v1/users", {
+        const res = await api.get("/api/v1/users", {
           headers: token ? { Authorization: `Bearer ${token}` } : {},
         });
-
-        console.log("API response:", response.data.data);
-        this.people = response.data.data;
-        console.log("people after assignment:", this.people);
+        this.people = res.data.data;
       } catch (err) {
-        this.error = err.message || "Failed to fetch people";
-        console.error("Error fetching people:", this.error);
+        this.error = err.message;
       } finally {
         this.loading = false;
-        console.log("Fetching finished. Loading =", this.loading);
       }
     },
   },

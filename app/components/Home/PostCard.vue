@@ -54,7 +54,7 @@
             :key="index"
             :src="img"
             alt="post image"
-            class="max-h-[400px] object-fill"
+            class="max-h-[350px] object-fill"
           />
           <p>
             {{

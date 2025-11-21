@@ -11,7 +11,7 @@
     </div>
 
     <!-- Login Form -->
-    <div class="flex items-center justify-center p-12">
+    <div class="flex items-center justnpmify-center p-12">
       <div class="w-full max-w-md">
         <div class="flex justify-center items-center">
           <img src="/images/Logo.png" alt="logo" class="h-32" />

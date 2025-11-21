@@ -51,8 +51,11 @@
             type="primary"
             native-type="submit"
             class="w-full !bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 !border-0"
+            :loading="loading"
+            :disabled="loading"
           >
-            Sign up
+            <span v-if="!loading">Sign up</span>
+            <span v-else>Signing up...</span>
           </el-button>
         </el-form>
         <p class="flex justify-center font-semibold text-gray-700 mt-4">
@@ -65,17 +68,14 @@
     </div>
   </main>
 </template>
-
-
-
 <script setup>
 import { ref } from "vue";
-import { useRouter } from "vue-router";
+import { navigateTo } from "#app";
 import api from "~~/utils/api";
 import { useAuthStore } from "~~/stores/Auth";
 
-const router = useRouter();
 const authStore = useAuthStore();
+
 const name = ref("");
 const email = ref("");
 const password = ref("");
@@ -83,7 +83,6 @@ const loading = ref(false);
 
 const signup = async () => {
   try {
-    console.log("signup function called");
     loading.value = true;
 
     const response = await api.post("/api/v1/auth/sign-up", {
@@ -96,17 +95,11 @@ const signup = async () => {
 
     authStore.setAuth(token, user);
 
-    console.log("Signup Success:", response.data.data);
-
     navigateTo("/");
   } catch (error) {
-    console.error(
-      "Sign-up Failed:",
-      error.response?.data.data || error.message
-    );
+    console.error(error);
   } finally {
     loading.value = false;
   }
 };
 </script>
-
